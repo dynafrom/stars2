@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element audit="true" label="STARS" max_length="40" name="x_hrblc_stars_stars" type="collection">
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <element choice="1" label="Application Group" max_length="40" name="application_group" type="choice">
+            <choice>
+                <element label="Client" sequence="0" value="Client"/>
+                <element label="Compliance" sequence="1" value="Compliance"/>
+                <element label="Digital" sequence="2" value="Digital"/>
+                <element label="F &amp; E" sequence="3" value="F &amp; E"/>
+                <element label="OPS" sequence="4" value="OPS"/>
+                <element label="Shared" sequence="5" value="Shared"/>
+                <element label="Technical" sequence="6" value="Technical"/>
+            </choice>
+        </element>
+        <element display="true" label="Name" max_length="40" name="name" type="string"/>
+        <element label="Notes" max_length="500" name="notes" type="string"/>
+        <element choice="1" label="Status" max_length="40" name="status" type="choice">
+            <choice>
+                <element label="Status Normal" sequence="0" value="Status Normal"/>
+                <element label="System Degraded" sequence="1" value="System Degraded"/>
+                <element label="Known Issue Exists" sequence="2" value="Known Issue Exists"/>
+                <element label="Not in Production" sequence="3" value="Not in Production"/>
+            </choice>
+        </element>
+        <element label="URL" max_length="40" name="url" type="string"/>
+    </element>
+</database>

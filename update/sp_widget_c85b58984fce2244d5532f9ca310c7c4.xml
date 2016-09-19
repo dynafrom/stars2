@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function() {	
+	var c = this;
+	
+	for (var x in c.data.dates) {				
+		c.data.dates[x] = moment(c.data.dates[x]).format('ll').split(',')[0];
+	}
+	
+	c.index = 4;
+	c.updated = true;
+		
+	c.left = function() {
+		c.updated = false;
+		c.index = (c.index > 0 ) ? c.index - 1 : c.index;
+		c.updated = true;
+	}
+	
+	c.right = function() {		
+		c.updated = false;
+		c.index = (c.index < 4) ? c.index + 1 : c.index;
+		c.updated = true;
+	}
+			
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* Status Icons */
+.fa-check-circle {
+  color: #5cb85c;
+}
+
+.fa-plus-circle {
+  color: #6E4CDD;
+}
+
+.fa-exclamation-circle {
+  color: #BB0000;
+}
+
+.fa-minus-circle{
+  color: #f0ad4e;
+}
+
+.fa-info-circle {
+  color: #5bc0de;
+}
+
+.disabled {
+  color: #ccc;
+}
+
+.panel-heading {
+  position: relative;
+}
+
+.panel-body {
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+
+.status-hr {
+  padding-top: 2px;
+  text-align: center;
+  font-size:13px;
+}
+
+.status-column {
+  padding: 5px;
+  text-align: center;
+
+  i {
+    padding-left: 3px;
+  }
+
+}
+
+.service {
+  cursor: pointer;
+
+  .fa {
+    padding: 0px 15px 0px px;
+    font-size: 18px;    
+  }
+}
+
+.subscribed {
+  color: $text-mutted;
+  white-space: nowrap;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list>title,glyph</field_list>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link/>
+        <name>STARS Status</name>
+        <option_schema>[{"hint":"Number of Services shown (use this to optimize performance)","name":"number_of_services","label":"Number of Services","type":"integer"}]</option_schema>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[data.categories = [];
+var svs = new GlideRecord("cmdb_ci_service");
+svs.addQuery("sys_class_name", "cmdb_ci_service");
+svs.setLimit(options.number_of_services || 250);
+svs.orderBy("category");
+svs.orderBy("name");
+svs.query();
+var currentCategory = "-";
+var catIndex = -1;
+while (svs.next()) {
+	var cat = svs.getValue("category");
+	if (cat != currentCategory) {
+		catIndex++;
+		currentCategory = cat;
+		data.categories[catIndex] = {};
+		data.categories[catIndex].name = cat;
+		data.categories[catIndex].label = svs.getDisplayValue("category");
+		if (data.categories[catIndex].label == "")
+			data.categories[catIndex].label = "Service";
+		data.categories[catIndex].services = [];
+	}
+	var svc = {};
+	svc.sys_id = svs.getUniqueValue();
+	svc.name = svs.getDisplayValue();
+	svc.subscribed = isSubscribed(svc.sys_id);
+	var outs = [];
+	for (var i = 0; i <= 4; i++) {
+		var out = new GlideAggregate("cmdb_ci_outage");
+		out.addQuery("cmdb_ci", svs.getUniqueValue());
+		out.addQuery("end", ">=", gs.daysAgoStart(i));
+		out.addQuery("begin", "<=", gs.daysAgoEnd(i));
+		out.addAggregate('COUNT', 'type');
+		out.query();
+		var svcOutageDay = {};
+		svcOutageDay.count = 0;
+
+		while (out.next()) {
+			var type = out.type;
+			var typeCount = out.getAggregate('COUNT', 'type');
+			svcOutageDay[type] = typeCount;
+			svcOutageDay.count += typeCount;
+		}
+		svcOutageDay.icon = "fa-check-circle";		
+		svcOutageDay.msg = gs.getMessage("did not have an outage");
+		if (svcOutageDay.count > 1) {
+			svcOutageDay.icon = "fa-plus-circle";
+			svcOutageDay.msg = gs.getMessage("had multiple issues");
+		} else if (svcOutageDay.outage > 0) {
+			svcOutageDay.icon = "fa-exclamation-circle";			
+			svcOutageDay.msg = gs.getMessage("had an outage");
+		} else if (svcOutageDay.degradation > 0) {
+			svcOutageDay.icon = "fa-minus-circle";		
+			svcOutageDay.msg = gs.getMessage("had a degradation of service");
+		} else if (svcOutageDay.planned > 0) {
+			svcOutageDay.icon = "fa-info-circle";			
+			svcOutageDay.msg = gs.getMessage("had planned maintenance");
+		}
+		outs.push(svcOutageDay);
+	}
+	svc.outages = outs;
+	data.categories[catIndex].services.push(svc);
+}
+data.dates = [];
+for (var i = 5; i > 0; i--)
+	data.dates.push(new GlideDateTime(gs.daysAgo(i - 1)).getLocalDate().getDisplayValue());
+
+function isSubscribed(id) {
+	var subs = new GlideRecord("m2m_sp_status_subscription");
+	subs.addQuery("sys_user", gs.getUserID());
+	subs.addQuery("cmdb_ci_service", id);
+	subs.query();
+	return subs.hasNext();
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admdwang</sys_created_by>
+        <sys_created_on>2016-09-19 16:34:56</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>c85b58984fce2244d5532f9ca310c7c4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>STARS Status</sys_name>
+        <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
+        <sys_update_name>sp_widget_c85b58984fce2244d5532f9ca310c7c4</sys_update_name>
+        <sys_updated_by>admdwang</sys_updated_by>
+        <sys_updated_on>2016-09-19 16:36:38</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-{{::c.options.color}} b">
+  <div class="panel-heading">    
+    <div class="hidden-xs row">
+      <span class="col-sm-7">${Status}</span>
+      <span ng-repeat="date in ::data.dates" class="col-sm-1 status-hr" ng-bind="::date"></span>
+    </div>
+    <div class="visible-xs row">    
+      <div class="col-xs-9">${Status}</div>      
+      <div class="col-xs-3 status-column">        
+        <i class="fa fa-arrow-left" ng-click="c.left()" ng-class="{disabled: (c.index == 0)}"></i>
+        <span ng-bind="data.dates[c.index]"></span>
+        <i class="fa fa-arrow-right" ng-click="c.right()" ng-class="{disabled: (c.index == 4)}"></i>              
+      </div>    
+    </div>                    
+  </div>
+  <!-- mobile view -->
+  <div ng-if="c.updated" class="visible-xs panel-body">           
+    <div ng-repeat="category in ::c.data.categories">    
+      <h5 ng-bind="::category.label"></h5>                     
+      <div ng-repeat="service in ::category.services" class="row service">        
+        <div class="col-xs-9">
+          <small ng-if="::service.subscribed" class="subscribed" title="Subscribed to updates"><i class="fa fa-envelope"></i></small>        
+          <a ng-href="?id=service_status&service={{::service.sys_id}}">{{::service.name}}</a>
+        </div>        
+        <div class="col-xs-3 status-column">
+          <span class="fa" ng-class="service.outages[4-c.index].icon" tooltips tooltip-template="{{service.name + ' ' + service.outages[4-c.index].msg + ' on ' + c.data.dates[c.index]}}"></span> 
+        </div>        
+      </div>             
+    </div>
+  </div>
+  <!-- desktop view -->
+  <div class="hidden-xs panel-body" ng-repeat="category in ::c.data.categories">
+    <h5 ng-bind="::category.label"></h5>                     
+    <div ng-repeat="service in ::category.services" class="row service">
+      <div class="col-sm-7">
+        <small ng-if="::service.subscribed" class="subscribed" title="Subscribed to updates"><i class="fa fa-envelope"></i></small>        
+        <a ng-href="?id=service_status&service={{::service.sys_id}}">{{::service.name}}</a>
+      </div>
+      <div ng-repeat="n in [0,1,2,3,4] track by $index" class="col-sm-1 status-column">
+        <span class="fa" ng-class="::service.outages[4-$index].icon" tooltips tooltip-template="{{::service.name + ' ' + service.outages[4-$index].msg + ' on ' + data.dates[$index]}}"></span>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

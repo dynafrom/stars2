@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="STARS Log" max_length="40" name="x_hrblc_stars_stars_log" type="collection">
+        <element label="Comment" max_length="40" name="comment" reference="x_hrblc_stars_500" type="string"/>
+        <element display="true" label="Parent" max_length="32" name="parent" reference="x_hrblc_stars_stars" type="reference"/>
+        <element choice="1" choice_field="status" choice_table="x_hrblc_stars_stars" label="Status" max_length="40" name="status" type="choice">
+            <choice>
+                <element label="Status Normal" sequence="0" value="Status Normal"/>
+                <element label="System Degraded" sequence="1" value="System Degraded"/>
+                <element label="Known Issue Exists" sequence="2" value="Known Issue Exists"/>
+                <element label="Not in Production" sequence="3" value="Not in Production"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="parent"/>
+        </index>
+    </element>
+</database>

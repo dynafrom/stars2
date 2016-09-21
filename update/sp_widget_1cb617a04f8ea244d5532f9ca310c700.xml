@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function ($scope, spUtil, snRecordWatcher, $rootScope) {
+  var q = "cmdb_ci.sys_class_name=cmdb_ci_service";
+  if ($scope.data.outageIDs != "")
+    q += "^NQ" + $scope.data.outageIDs;
+	
+  snRecordWatcher.initList("cmdb_ci_outage", q);
+
+  function get() {
+		$rootScope.$broadcast("sp.outage.updated");
+    spUtil.update($scope);
+  }
+
+  $scope.$on('record.updated', get); 
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.bs-callout {
+  margin: 10px 0 !important;
+  padding: 20px !important;
+  border-left-style: solid;
+  border-left-width: 10px;
+}
+
+.bs-callout-KnownIssueExists {
+  background-color: #fdf7f7;
+  border-color: #d9534f;
+}
+
+.bs-callout-SystemDegraded {
+  background-color: #fcf8f2;
+  border-color: #f0ad4e;
+}
+
+.bs-callout-NotinProduction {
+  background-color: #f4f8fa;
+  border-color: #5bc0de;
+}
+
+.bs-callout-success {
+  background-color: #ebf1e8;
+  border-color: #5cb85c;
+}
+
+.tooltip-inner {
+    width: 150px;
+}
+
+div.sp-outage-details {
+  margin-bottom: -10px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>stars_status_history</id>
+        <internal>false</internal>
+        <link/>
+        <name>STARS Status History</name>
+        <option_schema>[{"hint":"Display details from the cmdb_ci_outage record","name":"show_outage_details","label":"Show outage details","type":"boolean"}]</option_schema>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[// populate the 'data' object
+// e.g., data.table = $sp.getValue('table');
+var outage = new GlideRecord("x_hrblc_stars_stars_log");
+//outage.addQuery("begin", "<=", new GlideDateTime().getValue());
+//outage.addQuery("end", ">=", new GlideDateTime().getValue()).addOrCondition("end", "=", "NULL");
+outage.orderByDesc("begin");
+outage.query();
+data.outages = [];
+data.outageIDs = "";
+while (outage.next()) { 
+	var out = {};
+	out.serviceDisplay = outage.parent.getDisplayValue();
+	out.typeDisplay = outage.status.getDisplayValue();
+	out.type = outage.getValue("status").replace(/ /g,'');
+	out.details = outage.getValue("comments");
+	out.ci = outage.parent.getDisplayValue();
+	out.serviceID = outage.getValue("parent");
+	out.beginDisplay = outage.begin.getDisplayValue();
+	out.beginValue = outage.getValue("begin");
+	out.end = outage.end.getDisplayValue();
+	out.endValue = outage.getValue("end");
+	out.duration = outage.duration.getDisplayValue();
+	out.comment = outage.getValue('comment');
+	data.outages.push(out);
+	data.outageIDs += "," + outage.getUniqueValue();
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admdwang</sys_created_by>
+        <sys_created_on>2016-09-21 00:52:04</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>1cb617a04f8ea244d5532f9ca310c700</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>STARS Status History</sys_name>
+        <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
+        <sys_update_name>sp_widget_1cb617a04f8ea244d5532f9ca310c700</sys_update_name>
+        <sys_updated_by>admdwang</sys_updated_by>
+        <sys_updated_on>2016-09-21 01:14:15</sys_updated_on>
+        <template><![CDATA[<div ng-if="!data.service || data.outages.length > 0" class="panel panel-{{options.color}} b">
+  <div class="panel-heading">
+    <h4 class="panel-title">${Status History}<span ng-if="data.serviceDisplay"> - {{data.serviceDisplay}}</span></h4>
+  </div>
+
+  <div class="panel-body">
+    <div ng-if="!options.standalone && !data.service" class="hidden-xs">${This is a historical list of statuses.} ${If there is ever a service interruption, a notification will be posted to this page.} ${If you are experiencing problems not listed on this page, you can submit a request for service.}</div>
+
+    <div ng-if="data.outages.length == 0" class="col-xs-12 bs-callout bs-callout-success">
+      <div ng-if="!data.service">${No system is reporting an issue}</div>
+    </div>
+    <div ng-if="data.outages.length > 0" ng-repeat="outage in data.outages" class="col-xs-12 bs-callout bs-callout-{{outage.type}}">
+      <a ng-if="!data.service" style="color:inherit" ng-href="?id=stars_service_status&service={{outage.serviceID}}" title="${View {{outage.ci}} service}">{{outage.typeDisplay}} - {{outage.ci}} (started {{outage.begin}})
+        <div ng-if="options.show_outage_details == 'true' && outage.details" ng-bind-html="outage.details" class="sp-outage-details">
+        </div>
+        <small class="text-muted">
+              <span class="glyphicon glyphicon-time " />
+              <sn-time-ago timestamp="::outage.beginValue"></sn-time-ago>
+              <div>${Started} {{outage.beginDisplay}}<span ng-if="outage.duration">, ${Duration} {{outage.duration}}</span></div>
+              <span>${Comment:} {{::outage.comment}} </span>
+            </small>
+      </a>
+      <span ng-if="data.service" style="color:inherit">{{outage.typeDisplay}} - {{outage.ci}} (started {{outage.begin}})
+        <div ng-if="options.show_outage_details == 'true' && outage.details" ng-bind-html="outage.details" class="sp-outage-details"></div>
+      </span>
+    </div>
+    <div ng-if="::options.standalone"><a href="?id=services_status">${More information...}</a></div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

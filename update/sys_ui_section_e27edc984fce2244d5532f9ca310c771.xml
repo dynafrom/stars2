@@ -5,27 +5,27 @@
             <element>parent</element>
             <position>0</position>
             <sys_created_by>admdwang</sys_created_by>
-            <sys_created_on>2016-09-19 16:49:40</sys_created_on>
-            <sys_id>80be94dc4fce2244d5532f9ca310c795</sys_id>
+            <sys_created_on>2016-09-20 17:30:24</sys_created_on>
+            <sys_id>2291f5284f4a6ac01a612b8ca310c772</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
             <sys_updated_by>admdwang</sys_updated_by>
-            <sys_updated_on>2016-09-19 16:49:40</sys_updated_on>
+            <sys_updated_on>2016-09-20 17:30:24</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>sys_created_on</element>
+            <element>begin</element>
             <position>1</position>
             <sys_created_by>admdwang</sys_created_by>
-            <sys_created_on>2016-09-19 16:49:40</sys_created_on>
-            <sys_id>04be94dc4fce2244d5532f9ca310c795</sys_id>
+            <sys_created_on>2016-09-20 17:30:24</sys_created_on>
+            <sys_id>a291f5284f4a6ac01a612b8ca310c772</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
             <sys_updated_by>admdwang</sys_updated_by>
-            <sys_updated_on>2016-09-19 16:49:40</sys_updated_on>
+            <sys_updated_on>2016-09-20 17:30:24</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -33,13 +33,13 @@
             <element>.split</element>
             <position>2</position>
             <sys_created_by>admdwang</sys_created_by>
-            <sys_created_on>2016-09-19 16:49:40</sys_created_on>
-            <sys_id>84be94dc4fce2244d5532f9ca310c795</sys_id>
+            <sys_created_on>2016-09-20 17:30:24</sys_created_on>
+            <sys_id>2691f5284f4a6ac01a612b8ca310c772</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
             <sys_updated_by>admdwang</sys_updated_by>
-            <sys_updated_on>2016-09-19 16:49:40</sys_updated_on>
+            <sys_updated_on>2016-09-20 17:30:24</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
@@ -47,41 +47,69 @@
             <element>status</element>
             <position>3</position>
             <sys_created_by>admdwang</sys_created_by>
-            <sys_created_on>2016-09-19 16:49:40</sys_created_on>
-            <sys_id>08be94dc4fce2244d5532f9ca310c795</sys_id>
+            <sys_created_on>2016-09-20 17:30:24</sys_created_on>
+            <sys_id>a691f5284f4a6ac01a612b8ca310c772</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
             <sys_updated_by>admdwang</sys_updated_by>
-            <sys_updated_on>2016-09-19 16:49:40</sys_updated_on>
+            <sys_updated_on>2016-09-20 17:30:24</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>end</element>
+            <position>4</position>
+            <sys_created_by>admdwang</sys_created_by>
+            <sys_created_on>2016-09-20 17:30:24</sys_created_on>
+            <sys_id>2a91f5284f4a6ac01a612b8ca310c772</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
+            <sys_updated_by>admdwang</sys_updated_by>
+            <sys_updated_on>2016-09-20 17:30:24</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.end_split</element>
-            <position>4</position>
+            <position>5</position>
             <sys_created_by>admdwang</sys_created_by>
-            <sys_created_on>2016-09-19 16:49:40</sys_created_on>
-            <sys_id>88be94dc4fce2244d5532f9ca310c795</sys_id>
+            <sys_created_on>2016-09-20 17:30:24</sys_created_on>
+            <sys_id>aa91f5284f4a6ac01a612b8ca310c772</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
             <sys_updated_by>admdwang</sys_updated_by>
-            <sys_updated_on>2016-09-19 16:49:40</sys_updated_on>
+            <sys_updated_on>2016-09-20 17:30:24</sys_updated_on>
             <sys_user/>
             <type>.end_split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>comment</element>
-            <position>5</position>
+            <position>6</position>
             <sys_created_by>admdwang</sys_created_by>
-            <sys_created_on>2016-09-19 16:49:40</sys_created_on>
-            <sys_id>0cbe94dc4fce2244d5532f9ca310c795</sys_id>
+            <sys_created_on>2016-09-20 17:30:24</sys_created_on>
+            <sys_id>2e91f5284f4a6ac01a612b8ca310c772</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
             <sys_updated_by>admdwang</sys_updated_by>
-            <sys_updated_on>2016-09-19 16:49:40</sys_updated_on>
+            <sys_updated_on>2016-09-20 17:30:24</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>duration</element>
+            <position>7</position>
+            <sys_created_by>admdwang</sys_created_by>
+            <sys_created_on>2016-09-20 20:53:08</sys_created_on>
+            <sys_id>080022244f8aa244d5532f9ca310c7e3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_hrblc_stars_stars_log" sys_domain="global" view="Default view">e27edc984fce2244d5532f9ca310c771</sys_ui_section>
+            <sys_updated_by>admdwang</sys_updated_by>
+            <sys_updated_on>2016-09-20 20:53:08</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_filter">
+    <sys_filter action="INSERT_OR_UPDATE">
+        <filter table="sys_user">nameSTARTSWITHjeff m^nameISNOTEMPTY^EQ<item endquery="false" field="name" goto="false" newquery="false" operator="STARTSWITH" or="false" value="jeff m"/>
+            <item endquery="false" field="name" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter>
+        <group/>
+        <last_used>2016-09-20 21:13:51</last_used>
+        <mobile>true</mobile>
+        <roles/>
+        <sys_class_name>sys_filter</sys_class_name>
+        <sys_created_by>admdwang</sys_created_by>
+        <sys_created_on>2016-09-20 21:13:51</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_id>f7b4e2e84f8aa244d5532f9ca310c7ec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>mobile</sys_name>
+        <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
+        <sys_update_name>sys_filter_f7b4e2e84f8aa244d5532f9ca310c7ec</sys_update_name>
+        <sys_updated_by>admdwang</sys_updated_by>
+        <sys_updated_on>2016-09-20 21:13:51</sys_updated_on>
+        <table>sys_user</table>
+        <title>mobile</title>
+        <user display_value="Dyna Wang">aeed6c3f6f682d008d39fd8abb3ee4b7</user>
+    </sys_filter>
+</record_update>

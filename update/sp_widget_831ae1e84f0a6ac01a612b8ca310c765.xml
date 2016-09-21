@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function ($rootScope) {	
+	var c = this;		
+	var bc = [{label: c.data.systemStatusBreadcrumb, url: '?id=starsmain'}];
+	if (c.data.serviceDisplay) 
+		bc[bc.length] = {label: c.data.serviceDisplay, url: '#'};
+		
+	$rootScope.$broadcast('sp.update.breadcrumbs', bc);	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.description {
+  padding-bottom: 15px;  
+}
+
+.day {
+  float: left;
+  margin: 0px 1px 0px 1px; 
+  width: 9.984px; 
+  max-width: 9.984px; 
+  min-width: 9.984px; 
+  height: 30px; 
+  border-radius: 3px; 
+}
+
+.multiple-issues {
+  position: relative;
+  top: -5px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link/>
+        <name>STARS Service Status</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[// populate the 'data' object
+// e.g., data.table = $sp.getValue('table');
+data.systemStatusBreadcrumb = gs.getMessage("STARS Dashboard");
+data.service = $sp.getParameter("service");
+var service = new GlideRecord("x_hrblc_stars_stars_log");
+service.addQuery('parent', data.service);
+service.query();
+service.next();
+if (service)
+    (data.serviceDisplay = service.getDisplayValue());
+else
+    (data.service = null);
+data.days = [];
+for (var i = 89; i >= 0; i--) {
+    var day = {};
+    day.date = new GlideDateTime(gs.daysAgo(i)).getLocalDate().getDisplayValue();
+    var out = new GlideAggregate("x_hrblc_stars_stars_log");
+    out.addQuery("parent", data.service);
+    //out.addQuery("parent", service.sys_id);
+    out.addQuery("end", ">=", gs.daysAgoStart(i));
+    out.addQuery("begin", "<=", gs.daysAgoEnd(i));
+    out.addAggregate('COUNT', 'status');
+    out.query();
+    day.count = 0;
+
+    while (out.next()) {
+        var type = out.getValue('status');
+        var typeCount = out.getAggregate('COUNT', 'status');
+        day[type] = typeCount;
+        day.count += typeCount;
+    }
+    day.msg = gs.getMessage("No issues on");
+    day.color = "#5cb85c";
+    if (day.count > 1) {
+        day.msg = gs.getMessage("Multiple issues on");
+        day.color = "#6E4CDD";
+    } else if (day["Known Issue Exists"] > 0) {
+        day.msg = gs.getMessage("Outage on");
+        day.color = "#BB0000";
+    } else if (day["System Degraded"] > 0) {
+        day.msg = gs.getMessage("Service degradation on");
+        day.color = "#f0ad4e";
+    } else if (day["Not in Production"] > 0) {
+        day.msg = gs.getMessage("Not in production on");
+        day.color = "#5bc0de";
+    }
+
+    gs.info(day["Known Issue Exists"] + ' test');
+
+    data.days.push(day);
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admdwang</sys_created_by>
+        <sys_created_on>2016-09-20 16:57:41</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>831ae1e84f0a6ac01a612b8ca310c765</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>STARS Service Status</sys_name>
+        <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
+        <sys_update_name>sp_widget_831ae1e84f0a6ac01a612b8ca310c765</sys_update_name>
+        <sys_updated_by>admdwang</sys_updated_by>
+        <sys_updated_on>2016-09-20 23:25:13</sys_updated_on>
+        <template><![CDATA[<div ng-if="data.service" class="panel panel-{{::c.options.color}} b">
+  <div class="panel-heading">
+    <h4 class="panel-title">{{::c.data.serviceDisplay}} <span class="text-muted">(${last 90 days})</span></h4>    
+  </div>
+  <div class="panel-body">
+    <div class="description">${Color bar indicators flow left to right, from oldest to most recent status}</div>
+    <div ng-repeat="day in ::c.data.days" class="day" ng-class="{'multiple-issues': (day.count > 0)}" ng-style="::{'background-color': day.color}" tooltips tooltip-template="${{{::day.msg}} {{::day.date}}}">
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

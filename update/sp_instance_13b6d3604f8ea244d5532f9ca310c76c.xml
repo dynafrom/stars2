@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sp_instance_menu">
-    <sp_instance_menu action="INSERT_OR_UPDATE">
+<record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
         <active>true</active>
         <class_name/>
         <color>default</color>
@@ -10,24 +10,24 @@
         <order>1</order>
         <short_description/>
         <size>md</size>
-        <sp_column/>
-        <sp_widget display_value="Header Menu">5ef595c1cb12020000f8d856634c9c6e</sp_widget>
-        <sys_class_name>sp_instance_menu</sys_class_name>
+        <sp_column display_value="1">77761f204f8ea244d5532f9ca310c7c2</sp_column>
+        <sp_widget display_value="STARS Status History">1cb617a04f8ea244d5532f9ca310c700</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
         <sys_created_by>admdwang</sys_created_by>
-        <sys_created_on>2016-09-19 16:25:14</sys_created_on>
+        <sys_created_on>2016-09-21 00:52:17</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
-        <sys_id>4d199c944fce2244d5532f9ca310c749</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>STARS Menu</sys_name>
+        <sys_id>13b6d3604f8ea244d5532f9ca310c76c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
         <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
-        <sys_update_name>sp_instance_menu_4d199c944fce2244d5532f9ca310c749</sys_update_name>
+        <sys_update_name>sp_instance_13b6d3604f8ea244d5532f9ca310c76c</sys_update_name>
         <sys_updated_by>admdwang</sys_updated_by>
-        <sys_updated_on>2016-09-20 23:36:49</sys_updated_on>
-        <title>STARS Menu</title>
+        <sys_updated_on>2016-09-21 00:52:17</sys_updated_on>
+        <title/>
         <url/>
         <widget_parameters/>
-    </sp_instance_menu>
+    </sp_instance>
 </record_update>

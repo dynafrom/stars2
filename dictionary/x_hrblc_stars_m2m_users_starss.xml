@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Stars M2m Users Starss" max_length="40" name="x_hrblc_stars_m2m_users_starss" type="collection">
+        <element label="STARS" max_length="32" name="stars" reference="x_hrblc_stars_stars" type="reference"/>
+        <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="stars"/>
+        </index>
+        <index name="index2">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

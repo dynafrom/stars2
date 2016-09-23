@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_hrblc_stars.STARS_helper</api_name>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>STARS_helper</name>
+        <script><![CDATA[var STARS_helper = Class.create();
+STARS_helper.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	setOutage : function(producer){
+		if (!producer.end)
+			var cOut = this._createOutage(producer);
+	},
+	
+	removeOutage : function(producer){
+		var gr = new GlideRecord('x_hrblc_stars_stars');
+		gr.get(producer.parent);
+		if (gr){ // check if it exists
+			gr.status = producer.status;
+			if (producer.comment)
+				gr.comment = producer.comment;
+			gr.update();
+		}
+		
+		var nr = new GlideRecord('x_hrblc_stars_stars_log');
+		nr.addQuery('parent', producer.parent);
+		nr.addNullQuery('end');
+		nr.query();
+		while (nr.next()){
+			if (producer.begin)
+				nr.end = producer.begin;	
+			else
+				nr.end = new GlideDateTime.getValue();
+			nr.update();
+		}
+	},
+	
+	_createOutage : function (producer){
+		var gr = new GlideRecord('x_hrblc_stars_stars');
+		gr.get(producer.parent);
+		if (gr){ // check if it exists
+			gr.status = producer.status;
+			if (producer.comment)
+				gr.comment = producer.comment;
+			gr.update();
+		} else {
+			gs.error('BAD Application');
+		}
+	},
+	
+    type: 'STARS_helper'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admdwang</sys_created_by>
+        <sys_created_on>2016-09-22 17:14:17</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>e3a088d94fc22200d5532f9ca310c799</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>STARS_helper</sys_name>
+        <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
+        <sys_update_name>sys_script_include_e3a088d94fc22200d5532f9ca310c799</sys_update_name>
+        <sys_updated_by>admdwang</sys_updated_by>
+        <sys_updated_on>2016-09-22 20:35:11</sys_updated_on>
+    </sys_script_include>
+</record_update>

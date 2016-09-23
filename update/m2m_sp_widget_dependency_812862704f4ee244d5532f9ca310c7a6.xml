@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="m2m_sp_widget_dependency">
+    <m2m_sp_widget_dependency action="INSERT_OR_UPDATE">
+        <sp_dependency display_value="sp_codemirror_includes">016f19255b301200e39fc7ad31f91abd</sp_dependency>
+        <sp_widget display_value="STARS Catalog Item">892862704f4ee244d5532f9ca310c7a5</sp_widget>
+        <sys_class_name>m2m_sp_widget_dependency</sys_class_name>
+        <sys_created_by>admdwang</sys_created_by>
+        <sys_created_on>2016-09-21 16:07:11</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>812862704f4ee244d5532f9ca310c7a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sp_codemirror_includes.STARS Catalog Item</sys_name>
+        <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
+        <sys_update_name>m2m_sp_widget_dependency_812862704f4ee244d5532f9ca310c7a6</sys_update_name>
+        <sys_updated_by>admdwang</sys_updated_by>
+        <sys_updated_on>2016-09-21 16:07:11</sys_updated_on>
+    </m2m_sp_widget_dependency>
+</record_update>

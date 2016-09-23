@@ -13,29 +13,29 @@
         <kb_article/>
         <kb_category/>
         <kb_topic/>
-        <label>Report a Problem</label>
-        <order>300</order>
+        <label>Service History</label>
+        <order>200</order>
         <record_script/>
         <sc_cat_item/>
         <sc_category/>
         <short_description/>
-        <sp_page display_value="stars_rp">3fc76e304f4ee244d5532f9ca310c7d5</sp_page>
+        <sp_page display_value="stars_full_service_history">45e51fec4f4ea244d5532f9ca310c7bd</sp_page>
         <sp_rectangle_menu display_value="STARS Menu">4d199c944fce2244d5532f9ca310c749</sp_rectangle_menu>
         <sp_rectangle_menu_item/>
         <sys_class_name>sp_rectangle_menu_item</sys_class_name>
         <sys_created_by>admdwang</sys_created_by>
-        <sys_created_on>2016-09-21 00:50:31</sys_created_on>
+        <sys_created_on>2016-09-21 16:09:18</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
-        <sys_id>65561ba04f8ea244d5532f9ca310c7f8</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>Report a Problem</sys_name>
+        <sys_id>1ca866b04f4ee244d5532f9ca310c727</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Service History</sys_name>
         <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
-        <sys_update_name>sp_rectangle_menu_item_65561ba04f8ea244d5532f9ca310c7f8</sys_update_name>
+        <sys_update_name>sp_rectangle_menu_item_1ca866b04f4ee244d5532f9ca310c727</sys_update_name>
         <sys_updated_by>admdwang</sys_updated_by>
-        <sys_updated_on>2016-09-21 16:08:29</sys_updated_on>
+        <sys_updated_on>2016-09-21 16:09:18</sys_updated_on>
         <table/>
         <type>page</type>
         <url/>

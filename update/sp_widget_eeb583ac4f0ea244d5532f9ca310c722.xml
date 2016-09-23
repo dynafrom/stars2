@@ -46,48 +46,53 @@ data.service = $sp.getParameter("service");
 data.stars = [];
 var days = [];
 var catindex = -1;
-var service = new GlideRecord("x_hrblc_stars_stars");
+var service = new GlideRecord("x_hrblc_stars_stars_log");
+service.orderBy('parent');
 service.query();
+var catname = "";
 while (service.next()){
-	catindex++;
-	data.stars[catindex] = {};
-	data.stars[catindex].serviceDisplay = service.getDisplayValue();
-	data.stars[catindex].days = [];
-	days = [];
-	for (var i = 89; i >= 0; i--) {
-			var day = {}; //object containing the stuff
-			day.date = new GlideDateTime(gs.daysAgo(i)).getLocalDate().getDisplayValue();
-			var out = new GlideAggregate("x_hrblc_stars_stars_log");
-			out.addQuery("parent", service.sys_id);
-			out.addQuery("end", ">=", gs.daysAgoStart(i));
-			out.addQuery("begin", "<=", gs.daysAgoEnd(i));
-			out.addAggregate('COUNT', 'status');
-			out.query();
-			day.count = 0;
-			while (out.next()) {
-					var type = out.getValue('status');
-					var typeCount = out.getAggregate('COUNT', 'status');
-					day[type] = typeCount;
-					day.count += typeCount;
+	if (catname != service.parent.getDisplayValue()){
+		catindex++;
+		data.stars[catindex] = {};
+		data.stars[catindex].serviceDisplay = service.getDisplayValue();
+		data.stars[catindex].days = [];
+		days = [];
+		for (var i = 89; i >= 0; i--) {
+				var day = {}; //object containing the stuff
+				day.date = new GlideDateTime(gs.daysAgo(i)).getLocalDate().getDisplayValue();
+				var out = new GlideAggregate("x_hrblc_stars_stars_log");
+				out.addQuery("parent", service.parent);
+				out.addQuery("end", ">=", gs.daysAgoStart(i));
+				out.addQuery("begin", "<=", gs.daysAgoEnd(i));
+				out.addAggregate('COUNT', 'status');
+				out.query();
+				day.count = 0;
+				while (out.next()) {
+						var type = out.getValue('status');
+						var typeCount = out.getAggregate('COUNT', 'status');
+						day[type] = typeCount;
+						day.count += typeCount;
+				}
+				day.msg = gs.getMessage("No issues on");
+				day.color = "#5cb85c";
+				if (day.count > 1) {
+						day.msg = gs.getMessage("Multiple issues on");
+						day.color = "#6E4CDD";
+				} else if (day["Known Issue Exists"] > 0) {
+						day.msg = gs.getMessage("Outage on");
+						day.color = "#BB0000";
+				} else if (day["System Degraded"] > 0) {
+						day.msg = gs.getMessage("Service degradation on");
+						day.color = "#f0ad4e";
+				} else if (day["Not in Production"] > 0) {
+						day.msg = gs.getMessage("Not in production on");
+						day.color = "#5bc0de";
+				}
+			days.push(day);
 			}
-			day.msg = gs.getMessage("No issues on");
-			day.color = "#5cb85c";
-			if (day.count > 1) {
-					day.msg = gs.getMessage("Multiple issues on");
-					day.color = "#6E4CDD";
-			} else if (day["Known Issue Exists"] > 0) {
-					day.msg = gs.getMessage("Outage on");
-					day.color = "#BB0000";
-			} else if (day["System Degraded"] > 0) {
-					day.msg = gs.getMessage("Service degradation on");
-					day.color = "#f0ad4e";
-			} else if (day["Not in Production"] > 0) {
-					day.msg = gs.getMessage("Not in production on");
-					day.color = "#5bc0de";
-			}
-		days.push(day);
-		}
-	data.stars[catindex].days.push(days);
+		data.stars[catindex].days.push(days);
+	}
+	catname = service.parent.getDisplayValue();
 }
 
 /*
@@ -113,7 +118,7 @@ while (service.next()){
         <sys_created_on>2016-09-20 23:37:57</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>eeb583ac4f0ea244d5532f9ca310c722</sys_id>
-        <sys_mod_count>37</sys_mod_count>
+        <sys_mod_count>42</sys_mod_count>
         <sys_name>STARS Service Status Full</sys_name>
         <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
         <sys_policy/>
@@ -121,7 +126,7 @@ while (service.next()){
         <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
         <sys_update_name>sp_widget_eeb583ac4f0ea244d5532f9ca310c722</sys_update_name>
         <sys_updated_by>admdwang</sys_updated_by>
-        <sys_updated_on>2016-09-21 00:45:17</sys_updated_on>
+        <sys_updated_on>2016-09-22 16:29:59</sys_updated_on>
         <template><![CDATA[<div ng-repeat="e in ::c.data.stars" class="panel panel-{{::c.options.color}} b">
    <div class="panel-heading">
   		<h4 class="panel-title">{{::e.serviceDisplay}} <span class="text-muted">(${last 90 days})</span></h4> 

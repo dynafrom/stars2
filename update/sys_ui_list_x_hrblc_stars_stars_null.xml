@@ -88,10 +88,10 @@
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>admdwang</sys_created_by>
-            <sys_created_on>2016-09-19 16:12:13</sys_created_on>
+            <sys_created_on>2016-09-27 15:50:49</sys_created_on>
             <sys_customer_update>true</sys_customer_update>
             <sys_domain>global</sys_domain>
-            <sys_id>ab1614d04fce2244d5532f9ca310c7ec</sys_id>
+            <sys_id>b7ed117a4f86a2041a612b8ca310c7ad</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>x_hrblc_stars_stars</sys_name>
             <sys_package display_value="STARS" source="x_hrblc_stars">54bbc4904f8e2244d5532f9ca310c714</sys_package>
@@ -100,8 +100,8 @@
             <sys_scope display_value="STARS">54bbc4904f8e2244d5532f9ca310c714</sys_scope>
             <sys_update_name>sys_ui_list_x_hrblc_stars_stars_null</sys_update_name>
             <sys_updated_by>admdwang</sys_updated_by>
-            <sys_updated_on>2016-09-19 16:12:13</sys_updated_on>
-            <sys_user/>
+            <sys_updated_on>2016-09-27 15:50:49</sys_updated_on>
+            <sys_user display_value="Dyna Wang">aeed6c3f6f682d008d39fd8abb3ee4b7</sys_user>
             <view display_value="Default view" name="NULL">Default view</view>
             <view_name/>
         </sys_ui_list>

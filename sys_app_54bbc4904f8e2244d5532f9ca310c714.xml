@@ -15,16 +15,16 @@
         <scoped_administration>false</scoped_administration>
         <short_description/>
         <source>x_hrblc_stars</source>
-        <store_correlation_id>REPOAPP0000013112</store_correlation_id>
+        <store_correlation_id>REPOAPP0000013205</store_correlation_id>
         <store_url/>
         <sys_class_name>sys_app</sys_class_name>
         <sys_code/>
         <sys_created_by>admdwang</sys_created_by>
         <sys_created_on>2016-09-19 15:26:41</sys_created_on>
         <sys_id>54bbc4904f8e2244d5532f9ca310c714</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_updated_by>admdwang</sys_updated_by>
-        <sys_updated_on>2016-09-27 16:52:12</sys_updated_on>
+        <sys_updated_on>2016-09-27 16:52:28</sys_updated_on>
         <template/>
         <trackable>true</trackable>
         <user_role/>
